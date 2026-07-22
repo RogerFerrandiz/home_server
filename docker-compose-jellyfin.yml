@@ -1,0 +1,12 @@
+jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    ports:
+      - "8096:8096"
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - ${DATA_PATH}/jellyfin/config:/config
+      - ${DATA_PATH}/jellyfin/cache:/cache
+      - ${MEDIA_PATH}:/media:ro
+    restart: unless-stopped

@@ -1,0 +1,23 @@
+services:
+  nextcloud:
+    image: nextcloud:latest
+    container_name: nextcloud
+    ports:
+      - "8080:80"
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN}
+      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}
+      - TZ=Europe/Madrid
+    volumes:
+      - ${DATA_PATH}/nextcloud:/var/www/html
+    networks:
+      - servidor_net
+    restart: unless-stopped
+
+networks:
+  servidor_net:
+    external: true
